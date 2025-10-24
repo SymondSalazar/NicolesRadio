@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nicole's Radio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Nicole's Radio</h1>
+    <div class="player-container">
+        <div class="album-cover">
+            <img id="coverImage" src="" alt="Portada del álbum">
+        </div>
+        
+        <div class="song-info">
+            <h2 id="songTitle">Cargando...</h2>
+            <p id="artistName"></p>
+            <div class="time-info">
+                <span id="currentTime">0:00</span>
+                <span id="totalTime">0:00</span>
+            </div>
+            <div class="progress-bar">
+                <div id="progressFill"></div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button id="prevBtn" class="control-btn">
+                <img src="1x/previus.png" alt="Anterior">
+            </button>
+            <button id="playPauseBtn" class="control-btn play-btn">
+                <img src="play.png" alt="Reproducir">
+            </button>
+            <button id="nextBtn" class="control-btn">
+                <img src="1x/next.png" alt="Siguiente">
+            </button>
+        </div>
+        
+        <div class="lyrics-container">
+            <div id="lyricsDisplay"></div>
+        </div>
+    </div>
+    
+    <audio id="audioPlayer"></audio>
+    
+    <script src="script.js"></script>
+</body>
+</html>
