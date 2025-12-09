@@ -150,12 +150,12 @@ newMoodInput.addEventListener("keypress", (e) => {
 
 // 2. Abrir modales
 moodsBtn.addEventListener("click", () => {
-  modalTitle.innerText = "Mis Moods ✨";
+  modalTitle.innerText = "Tus moods";
   openModal(false);
 });
 
 addToMoodBtn.addEventListener("click", () => {
-  modalTitle.innerText = "Guardar en Mood ❤️";
+  modalTitle.innerText = "Guardar  en tu mood";
   openModal(true);
 });
 
