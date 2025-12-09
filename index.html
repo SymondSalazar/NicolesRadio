@@ -1,49 +1,119 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nicole's Radio</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <h1>Nicole's Radio</h1>
-    <div class="player-container">
-        <div class="album-cover">
-            <img id="coverImage" src="" alt="Portada del álbum">
-        </div>
-        
-        <div class="song-info">
-            <h2 id="songTitle">Cargando...</h2>
-            <p id="artistName"></p>
-            <div class="time-info">
-                <span id="currentTime">0:00</span>
-                <span id="totalTime">0:00</span>
-            </div>
-            <div class="progress-bar">
-                <div id="progressFill"></div>
-            </div>
-        </div>
-        
-        <div class="controls">
-            <button id="prevBtn" class="control-btn">
-                <img src="1x/previus.png" alt="Anterior">
-            </button>
-            <button id="playPauseBtn" class="control-btn play-btn">
-                <img src="play.png" alt="Reproducir">
-            </button>
-            <button id="nextBtn" class="control-btn">
-                <img src="1x/next.png" alt="Siguiente">
-            </button>
-        </div>
-        
-        <div class="lyrics-container">
-            <div id="lyricsDisplay"></div>
-        </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nicole's Radio 💖</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="bg-circles">
+      <div class="circle c1"></div>
+      <div class="circle c2"></div>
+      <div class="circle c3"></div>
     </div>
-    
+
+    <h1>Nicole's Radio <i class="fa-solid fa-music"></i></h1>
+
+    <div class="player-container">
+      <div class="top-bar">
+        <div class="left-controls">
+          <button id="moodsBtn" class="icon-btn" title="Mis Moods">
+            <i class="fa-solid fa-list-ul"></i>
+          </button>
+          <button
+            id="addToMoodBtn"
+            class="icon-btn like-btn"
+            title="Guardar en Mood"
+          >
+            <i class="fa-regular fa-heart"></i>
+          </button>
+        </div>
+
+        <div class="playlist-badge">
+          <small>Escuchando:</small>
+          <span id="currentMoodIndicator">Radio General</span>
+        </div>
+      </div>
+
+      <div class="album-cover">
+        <img id="coverImage" src="" alt="Portada del álbum" />
+        <div class="vinyl-shine"></div>
+      </div>
+
+      <div class="song-info">
+        <h2 id="songTitle">Cargando...</h2>
+        <p id="artistName">Espere un momento</p>
+
+        <div class="progress-area">
+          <div class="progress-bar">
+            <div id="progressFill"></div>
+          </div>
+          <div class="time-info">
+            <span id="currentTime">0:00</span>
+            <span id="totalTime">0:00</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="prevBtn" class="control-btn sm">
+          <i class="fa-solid fa-backward-step"></i>
+        </button>
+        <button id="playPauseBtn" class="control-btn lg play-btn">
+          <i class="fa-solid fa-play"></i>
+        </button>
+        <button id="nextBtn" class="control-btn sm">
+          <i class="fa-solid fa-forward-step"></i>
+        </button>
+      </div>
+
+      <div class="lyrics-container">
+        <div id="lyricsDisplay">
+          <p style="color: #999; font-size: 12px">...</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="moodModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="modalTitle">Mis Moods ✨</h3>
+          <button id="closeModal" class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="create-mood-form">
+            <input
+              type="text"
+              id="newMoodInput"
+              placeholder="Crear nuevo mood (ej: Relax)..."
+            />
+            <button id="saveMoodBtn" class="add-btn">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
+
+          <div class="divider"></div>
+
+          <button id="showAllSongsBtn" class="action-btn secondary">
+            <i class="fa-solid fa-radio"></i> Radio General (Todo)
+          </button>
+
+          <div id="moodsList" class="moods-list"></div>
+        </div>
+      </div>
+    </div>
+
     <audio id="audioPlayer"></audio>
-    
+
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
