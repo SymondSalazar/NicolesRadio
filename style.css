@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent; /* Quita el flash azul al tocar en Android/iOS */
+  -webkit-tap-highlight-color: transparent;
 }
 
 :root {
@@ -17,7 +17,6 @@
 body {
   font-family: "Poppins", sans-serif;
   background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
-  /* Usamos dvh para móviles (ignora la barra del navegador) */
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;
@@ -25,8 +24,7 @@ body {
   justify-content: center;
   align-items: center;
   padding: 20px;
-  overflow-x: hidden; /* Solo ocultamos desborde horizontal */
-  overflow-y: auto; /* Permitir scroll si la pantalla es muy pequeña */
+  overflow-x: hidden;
   position: relative;
 }
 
@@ -79,7 +77,7 @@ h1 {
   text-shadow: 0 2px 10px rgba(255, 255, 255, 0.5);
   z-index: 2;
   text-align: center;
-  font-size: 1.5rem; /* Un poco más pequeño para móviles */
+  font-size: 1.5rem;
 }
 
 /* --- Player Card (Glassmorphism) --- */
@@ -95,7 +93,7 @@ h1 {
   border: 1px solid rgba(255, 255, 255, 0.8);
   position: relative;
   z-index: 10;
-  margin: auto; /* Para centrar si hay scroll */
+  margin: auto;
 }
 
 /* --- Barra Superior --- */
@@ -109,18 +107,20 @@ h1 {
 .left-controls {
   display: flex;
   gap: 15px;
-} /* Más espacio para dedos */
+}
 
 .icon-btn {
   background: transparent;
   border: none;
   color: var(--dark);
-  font-size: 1.3rem; /* Iconos más grandes para tocar fácil */
+  font-size: 1.3rem;
   cursor: pointer;
   padding: 5px;
+  transition: transform 0.2s;
 }
 .icon-btn:hover {
   color: var(--primary);
+  transform: scale(1.1);
 }
 .like-btn.active {
   color: #ff4757;
@@ -133,7 +133,7 @@ h1 {
   }
 }
 
-/* Badge Derecha */
+/* Badge Derecha (Indicador de Playlist) */
 .playlist-badge {
   text-align: right;
   display: flex;
@@ -214,9 +214,9 @@ h1 {
   width: 100%;
   margin-bottom: 20px;
   padding: 0 5px;
-} /* Padding extra para tocar mejor */
+}
 .progress-bar {
-  height: 8px; /* Un poco más gruesa para móviles */
+  height: 8px;
   background: #fff;
   border-radius: 10px;
   cursor: pointer;
@@ -256,6 +256,7 @@ h1 {
   background: #fff;
   color: var(--dark);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s;
 }
 .control-btn.sm {
   width: 50px;
@@ -309,36 +310,55 @@ h1 {
   }
 }
 
-/* --- MODAL OPTIMIZADA PARA MÓVIL --- */
+/* --- MODAL (CENTRADO PERFECTO PARA MÓVIL) --- */
 .modal {
   display: none;
   position: fixed;
-  z-index: 9999; /* Z-index alto para estar sobre todo */
-  left: 0;
   top: 0;
-  width: 100%;
-  height: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
   background-color: rgba(85, 62, 78, 0.6);
   backdrop-filter: blur(5px);
-  align-items: center; /* Centrado vertical */
-  justify-content: center;
-  padding: 20px; /* Margen de seguridad */
+  -webkit-backdrop-filter: blur(5px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
+
 .modal.show {
   display: flex;
-  animation: fadeIn 0.3s;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.3s forwards;
 }
 
 .modal-content {
   background: #fff;
-  width: 100%;
+  width: 90%;
   max-width: 350px;
   border-radius: 25px;
   padding: 25px;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
-  max-height: 85vh; /* Evita que sea más alto que la pantalla */
+  max-height: 85vh;
+  position: relative;
+  margin: 0 auto;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .modal-header {
@@ -348,17 +368,30 @@ h1 {
   margin-bottom: 15px;
   flex-shrink: 0;
 }
+
 .modal-header h3 {
   color: var(--dark);
   font-size: 1.2rem;
+  margin: 0;
 }
+
 .close-btn {
   background: none;
   border: none;
   font-size: 2rem;
+  line-height: 1;
   cursor: pointer;
   color: var(--primary);
-  padding: 0 10px;
+  padding: 0 5px;
+  display: flex;
+  align-items: center;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
 }
 
 /* Formulario Nuevo Mood */
@@ -370,12 +403,13 @@ h1 {
 }
 #newMoodInput {
   flex: 1;
+  min-width: 0;
   padding: 12px;
   border: 2px solid #f0f0f0;
   border-radius: 12px;
   outline: none;
   font-family: "Poppins", sans-serif;
-  font-size: 16px; /* 16px evita Zoom automático en iOS al escribir */
+  font-size: 16px;
 }
 #newMoodInput:focus {
   border-color: var(--secondary);
@@ -389,6 +423,7 @@ h1 {
   border-radius: 12px;
   cursor: pointer;
   font-size: 1.2rem;
+  flex-shrink: 0;
 }
 
 .divider {
@@ -400,7 +435,7 @@ h1 {
 
 .action-btn {
   width: 100%;
-  padding: 14px; /* Botón más alto para dedo */
+  padding: 14px;
   border: none;
   border-radius: 12px;
   background: var(--primary);
@@ -420,13 +455,13 @@ h1 {
   color: var(--dark);
 }
 
-/* Lista de Moods con Scroll */
+/* Lista de Moods */
 .moods-list {
-  overflow-y: auto; /* Scroll interno si hay muchos */
+  overflow-y: auto;
   margin-top: 10px;
   padding-right: 5px;
-  flex-grow: 1; /* Ocupa el espacio restante */
-  /* Estilos para scroll táctil suave */
+  flex: 1;
+  min-height: 50px;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -434,7 +469,7 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 10px; /* Más padding vertical */
+  padding: 15px 10px;
   border-bottom: 1px solid #f9f9f9;
   cursor: pointer;
   border-radius: 10px;
@@ -443,14 +478,15 @@ h1 {
   background: #fff5f8;
 }
 .mood-controls i {
-  padding: 10px; /* Área de toque aumentada */
+  padding: 10px;
+  color: #ccc;
 }
 
-/* --- MEDIA QUERIES PARA CELULARES PEQUEÑOS --- */
+/* --- MEDIA QUERIES --- */
 @media (max-width: 480px) {
   body {
     padding: 10px;
-    justify-content: flex-start; /* Evita que se corte arriba si es muy alto */
+    justify-content: center;
   }
 
   .player-container {
@@ -461,7 +497,7 @@ h1 {
 
   h1 {
     font-size: 1.4rem;
-    margin-top: 10px;
+    margin-top: 5px;
   }
 
   .control-btn.sm {
@@ -473,12 +509,26 @@ h1 {
     height: 65px;
   }
 
-  /* Ajuste Modal Teclado */
-  .modal {
-    align-items: flex-start;
-    padding-top: 40px;
+  .modal.show {
+    padding: 15px;
   }
+
   .modal-content {
-    max-height: 90vh;
+    width: 90%;
+    max-width: 340px;
+    padding: 20px;
+    margin: 0 auto;
+  }
+}
+
+/* Para pantallas muy pequeñas (menos de 360px) */
+@media (max-width: 360px) {
+  .modal.show {
+    padding: 10px;
+  }
+
+  .modal-content {
+    max-width: 100%;
+    padding: 18px;
   }
 }

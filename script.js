@@ -263,9 +263,13 @@ window.deleteMood = function (index) {
 function openModal(mode) {
   moodModal.classList.add("show");
   renderMoodsInModal(mode);
+  // Prevenir scroll del body cuando el modal está abierto
+  document.body.style.overflow = "hidden";
 }
 function closeModalFn() {
   moodModal.classList.remove("show");
+  // Restaurar scroll del body
+  document.body.style.overflow = "";
 }
 closeModal.addEventListener("click", closeModalFn);
 window.addEventListener("click", (e) => {
